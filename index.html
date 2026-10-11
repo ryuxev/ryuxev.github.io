@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0a0b">
-  <meta name="description" content="The personal website of Ryuxev. Technology, creativity, gaming, and personal projects.">
+  <meta name="description" content="The personal website of Ryuxev. Explore my interests, projects, socials, and Spotify playlist.">
+
   <title>Ryuxev — Personal Portfolio</title>
 
   <style>
@@ -72,6 +73,7 @@
       font-size: 22px;
       font-weight: 800;
       letter-spacing: 3px;
+      white-space: nowrap;
     }
 
     .brand span {
@@ -80,7 +82,8 @@
 
     .navlinks {
       display: flex;
-      gap: 28px;
+      flex-wrap: wrap;
+      gap: 24px;
       font-size: 13px;
       color: #c0bdb6;
     }
@@ -175,6 +178,7 @@
       margin: 8px 0 24px;
       font-size: clamp(30px, 5vw, 44px);
       letter-spacing: -1.5px;
+      line-height: 1.2;
     }
 
     .about {
@@ -184,12 +188,13 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
       margin-top: 28px;
     }
 
     .card {
+      min-width: 0;
       padding: 25px;
       background: linear-gradient(
         145deg,
@@ -223,6 +228,141 @@
       font-size: 14px;
     }
 
+    /* SOCIALS */
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, .09);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, .035),
+        rgba(255, 255, 255, .008)
+      );
+      border-radius: 8px;
+      transition:
+        border-color .25s ease,
+        background .25s ease,
+        transform .25s ease;
+    }
+
+    .social-card:hover {
+      border-color: var(--gold);
+      background: rgba(200, 169, 110, .055);
+      transform: translateY(-3px);
+    }
+
+    .social-icon {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .social-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .social-info h3 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .social-info p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .social-arrow {
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    /* SPOTIFY PLAYLIST */
+
+    .music-card {
+      margin-top: 32px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: linear-gradient(
+        145deg,
+        rgba(200, 169, 110, .055),
+        rgba(255, 255, 255, .012)
+      );
+    }
+
+    .music-heading {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .music-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #1db954;
+      color: #061109;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .music-heading h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .music-heading p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .spotify-embed {
+      display: block;
+      width: 100%;
+      height: 352px;
+      border: 0;
+      border-radius: 8px;
+      background: #121212;
+    }
+
+    .playlist-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--gold);
+      font-size: 13px;
+    }
+
+    .playlist-link:hover {
+      text-decoration: underline;
+    }
+
+    /* CONTACT */
+
     .contact-panel {
       padding: 38px;
       border: 1px solid var(--border);
@@ -244,6 +384,8 @@
       flex-wrap: wrap;
     }
 
+    /* SCROLL ANIMATION */
+
     .reveal {
       opacity: 0;
       transform: translateY(16px);
@@ -257,7 +399,7 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 700px) {
       nav {
         min-height: 68px;
         gap: 12px;
@@ -290,19 +432,33 @@
         grid-template-columns: 1fr;
       }
 
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+
       .contact-panel {
         padding: 25px;
       }
-    }
 
-    @media (max-width: 380px) {
-      .navlinks {
-        gap: 8px;
-        font-size: 10px;
+      .music-card {
+        padding: 16px;
       }
 
-      .brand {
-        font-size: 15px;
+      .spotify-embed {
+        height: 352px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .navlinks {
+        gap: 14px;
+        font-size: 12px;
       }
     }
 
@@ -324,6 +480,8 @@
 
 <body>
 
+  <!-- NAVIGATION -->
+
   <header>
     <nav class="container">
       <a class="brand" href="#home">RYU<span>XEV</span></a>
@@ -332,6 +490,7 @@
         <a href="#about">About</a>
         <a href="#interests">Interests</a>
         <a href="#projects">Projects</a>
+        <a href="#socials">Socials</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
@@ -340,6 +499,7 @@
   <main>
 
     <!-- HERO -->
+
     <div class="container hero" id="home">
       <div class="eyebrow">
         Personal portfolio · Est. 2026
@@ -368,6 +528,7 @@
     </div>
 
     <!-- ABOUT -->
+
     <section id="about">
       <div class="container reveal">
         <div class="eyebrow">01 / The person</div>
@@ -386,6 +547,7 @@
     </section>
 
     <!-- INTERESTS -->
+
     <section id="interests">
       <div class="container reveal">
         <div class="eyebrow">02 / What I enjoy</div>
@@ -423,6 +585,7 @@
     </section>
 
     <!-- PROJECTS -->
+
     <section id="projects">
       <div class="container reveal">
         <div class="eyebrow">03 / Selected work</div>
@@ -459,11 +622,134 @@
       </div>
     </section>
 
+    <!-- SOCIALS -->
+
+    <section id="socials">
+      <div class="container reveal">
+        <div class="eyebrow">04 / Find me online</div>
+
+        <h2 class="section-title">
+          Around the internet.
+        </h2>
+
+        <p class="about">
+          Different platforms, different sides of me.
+          Connect, follow along, or join the community.
+        </p>
+
+        <div class="social-grid">
+
+          <!-- INSTAGRAM -->
+
+          <a
+            class="social-card"
+            href="https://www.instagram.com/ryuxev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit Ryuxev on Instagram"
+          >
+            <div class="social-icon" aria-hidden="true">◎</div>
+            <div class="social-info">
+              <h3>Instagram</h3>
+              <p>@ryuxev</p>
+            </div>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- DISCORD -->
+
+          <a
+            class="social-card"
+            href="https://discord.gg/UVtjQU6kh7"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Join the Ryuxev Discord server"
+          >
+            <div class="social-icon" aria-hidden="true">⌘</div>
+            <div class="social-info">
+              <h3>Discord</h3>
+              <p>Join the server</p>
+            </div>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- X / TWITTER -->
+
+          <a
+            class="social-card"
+            href="https://x.com/ryuxev"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow Ryuxev on X"
+          >
+            <div class="social-icon" aria-hidden="true">𝕏</div>
+            <div class="social-info">
+              <h3>X / Twitter</h3>
+              <p>@ryuxev</p>
+            </div>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- YOUTUBE -->
+
+          <a
+            class="social-card"
+            href="https://www.youtube.com/@Ryuxev"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit Ryuxev on YouTube"
+          >
+            <div class="social-icon" aria-hidden="true">▶</div>
+            <div class="social-info">
+              <h3>YouTube</h3>
+              <p>@Ryuxev</p>
+            </div>
+            <span class="social-arrow" aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+
+        <!-- SPOTIFY PLAYLIST -->
+
+        <div class="music-card">
+          <div class="music-heading">
+            <div class="music-icon" aria-hidden="true">♫</div>
+            <div>
+              <h3>Currently on repeat.</h3>
+              <p>My Spotify playlist · Listen along</p>
+            </div>
+          </div>
+
+          <iframe
+            class="spotify-embed"
+            title="Ryuxev Spotify playlist"
+            src="https://open.spotify.com/embed/playlist/0sSe33nN4qGlfSH3M7SDJz?utm_source=generator"
+            width="100%"
+            height="352"
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+
+          <a
+            class="playlist-link"
+            href="https://open.spotify.com/playlist/0sSe33nN4qGlfSH3M7SDJz?si=82567d52b8ba41dc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open playlist in Spotify ↗
+          </a>
+        </div>
+
+      </div>
+    </section>
+
     <!-- CONTACT -->
+
     <section id="contact">
       <div class="container reveal">
         <div class="contact-panel">
-          <div class="eyebrow">04 / Get in touch</div>
+          <div class="eyebrow">05 / Get in touch</div>
 
           <h2 class="section-title">
             Let's connect.
@@ -471,7 +757,7 @@
 
           <p class="intro">
             Have an idea, a project, or just want to say hello?
-            You can reach me through Gmail using the button below.
+            Reach me through Gmail using the button below.
           </p>
 
           <a
@@ -489,6 +775,7 @@
   </main>
 
   <!-- FOOTER -->
+
   <footer>
     <div class="container footer-inner">
       <span>
@@ -504,22 +791,28 @@
     document.getElementById("year").textContent =
       new Date().getFullYear();
 
-    // Reveal sections smoothly when they enter the viewport.
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    // Reveal sections smoothly as they enter the viewport.
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
 
-    document.querySelectorAll(".reveal").forEach(element => {
-      observer.observe(element);
-    });
+      document.querySelectorAll(".reveal").forEach(element => {
+        observer.observe(element);
+      });
+    } else {
+      document.querySelectorAll(".reveal").forEach(element => {
+        element.classList.add("visible");
+      });
+    }
   </script>
 
 </body>
