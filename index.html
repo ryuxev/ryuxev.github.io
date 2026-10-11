@@ -7,8 +7,40 @@
   <meta name="theme-color" content="#0a0a0b">
   <meta name="description" content="The personal website of Ryuxev. Explore my interests, projects, socials, and Spotify playlist.">
 
-  <title>Ryuxev — Personal Portfolio</title>
-  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>Ryuxev</title>
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+
+  <script>
+  const text = "Ryuxev";
+  let index = 0;
+  let deleting = false;
+
+  function typeTitle() {
+    document.title = text.substring(0, index);
+
+    if (!deleting) {
+      index++;
+
+      if (index > text.length) {
+        deleting = true;
+        setTimeout(typeTitle, 1000);
+        return;
+      }
+    } else {
+      index--;
+
+      if (index < 0) {
+        index = 0;
+        deleting = false;
+      }
+    }
+
+    setTimeout(typeTitle, deleting ? 150 : 250);
+  }
+
+  typeTitle();
+</script>
 
   <style>
     :root {
