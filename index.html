@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0b">
+  <meta name="description" content="The personal website of Ryuxev.">
+  <title>Ryuxev — Personal Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --panel: #121214;
+      --gold: #c8a96e;
+      --text: #f4f0e8;
+      --muted: #92908b;
+      --border: rgba(200, 169, 110, .20);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%,
+          rgba(200,169,110,.09), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1080px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(10,10,11,.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .brand span { color: var(--gold); }
+
+    .navlinks {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+      color: #c0bdb6;
+    }
+
+    .navlinks a:hover { color: var(--gold); }
+
+    .hero {
+      min-height: 76vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 0 110px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 22px 0 18px;
+      font-size: clamp(54px, 10vw, 100px);
+      line-height: .98;
+      letter-spacing: -5px;
+      font-weight: 750;
+    }
+
+    h1 span {
+      color: var(--gold);
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .intro {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 13px;
+      transition: .25s ease;
+    }
+
+    .btn.primary {
+      color: #100e09;
+      background: var(--gold);
+      border-color: var(--gold);
+      font-weight: 700;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold);
+    }
+
+    section { padding: 78px 0; }
+
+    .section-title {
+      margin: 8px 0 24px;
+      font-size: clamp(30px, 5vw, 44px);
+      letter-spacing: -1.5px;
+    }
+
+    .about {
+      max-width: 700px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .card {
+      padding: 25px;
+      background: linear-gradient(
+        145deg, rgba(255,255,255,.035), rgba(255,255,255,.008)
+      );
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 8px;
+      transition: border-color .25s, transform .25s;
+    }
+
+    .card:hover {
+      border-color: var(--border);
+      transform: translateY(-4px);
+    }
+
+    .card .number {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .card h3 { margin: 14px 0 8px; }
+    .card p { color: var(--muted); font-size: 14px; }
+
+    .contact-panel {
+      padding: 38px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(200,169,110,.035);
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid rgba(255,255,255,.07);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 650px) {
+      nav { min-height: 68px; }
+      .navlinks { gap: 13px; font-size: 12px; }
+      .brand { font-size: 18px; letter-spacing: 2px; }
+      h1 { letter-spacing: -3px; }
+      .hero { min-height: 70vh; padding: 80px 0; }
+      section { padding: 55px 0; }
+      .grid { grid-template-columns: 1fr; }
+      .contact-panel { padding: 25px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a class="brand" href="#home">RYU<span>XEV</span></a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#interests">Interests</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container hero" id="home">
+      <div class="eyebrow">Personal portfolio · Est. 2026</div>
+      <h1>Quiet ambition.<br><span>Bold vision.</span></h1>
+      <p class="intro">
+        I'm Ryuxev. Welcome to my personal space on the internet —
+        a place for my interests, ideas, creative work, and the
+        things I'm building along the way.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="#about">Discover my world ↗</a>
+        <a class="btn" href="#projects">Explore projects</a>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="container reveal">
+        <div class="eyebrow">01 / The person</div>
+        <h2 class="section-title">A little about me.</h2>
+        <p class="about">
+          I believe in continuous growth, creative thinking,
+          and doing things with purpose. I'm interested in technology,
+          design, gaming, and exploring ideas that turn into something
+          meaningful. This website is my evolving digital identity.
+        </p>
+      </div>
+    </section>
+
+    <section id="interests">
+      <div class="container reveal">
+        <div class="eyebrow">02 / What I enjoy</div>
+        <h2 class="section-title">Areas of interest.</h2>
+        <div class="grid">
+          <article class="card">
+            <div class="number">01 — TECHNOLOGY</div>
+            <h3>Building</h3>
+            <p>Exploring digital tools, technology, and new ideas.</p>
+          </article>
+          <article class="card">
+            <div class="number">02 — CREATIVITY</div>
+            <h3>Design</h3>
+            <p>Appreciating thoughtful design and distinctive visuals.</p>
+          </article>
+          <article class="card">
+            <div class="number">03 — GAMING</div>
+            <h3>Gaming</h3>
+            <p>Discovering games, communities, and interactive worlds.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container reveal">
+        <div class="eyebrow">03 / Selected work</div>
+        <h2 class="section-title">Things I'm building.</h2>
+        <div class="grid">
+          <article class="card">
+            <div class="number">PROJECT 01</div>
+            <h3>Personal Website</h3>
+            <p>A home for my work, ideas, and online presence.</p>
+          </article>
+          <article class="card">
+            <div class="number">PROJECT 02</div>
+            <h3>Coming Soon</h3>
+            <p>A space for a future project. More details to follow.</p>
+          </article>
+          <article class="card">
+            <div class="number">PROJECT 03</div>
+            <h3>Coming Soon</h3>
+            <p>New ideas take shape here over time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container reveal">
+        <div class="contact-panel">
+          <div class="eyebrow">04 / Get in touch</div>
+          <h2 class="section-title">Let's connect.</h2>
+          <p class="intro">
+            Have an idea, a project, or just want to say hello?
+            You can reach me through the link below.
+          </p>
+          <!-- Replace this placeholder with your email address. -->
+          <a class="btn primary"
+             href="mailto:YOUR_EMAIL@example.com">Send me an email ↗</a>
+          <!-- Add your social links here when ready. -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> RYUXEV</span>
+      <span>Made with intention.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>
